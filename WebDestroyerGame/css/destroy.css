@@ -1,0 +1,66 @@
+/*
+File Name: WebDestroyerGame
+    Last Modified By: Gil Emerson
+    Date Last Modified: 11/09/2014
+    Program Description: Create an original 2D side scrolling arcade game (left to right & right to left).
+                         The game must have a start screen, (that includes game instructions for the users)
+                         the main game screen, and a end game screen.
+    Revision History: #3
+*/
+
+body {
+	background: #000000;
+}
+
+#game {
+	display: block;
+	margin: -5px auto 0px;
+}
+
+#player1 {
+	display: block;
+	margin: -800px auto 0px;
+}
+
+#enemy {
+	display: block;
+	margin: -800px auto 0px;
+}
+
+#HUD {
+	display: block;
+	margin: -800px auto 0px;
+}
+
+#score {
+	position: absolute;
+	margin: 800px 550px 0px;
+	top: 10px;
+	left: 10px;
+    color: red;
+}
+
+#warning {
+	position: absolute;
+	margin: 850px 550px 0px;
+	top: 10px;
+	left: 10px;
+}
+.menuScreen {
+	background: #000000 url(../images/MenuScreen1.png);
+}
+.menuScreen2 {
+	background: #000000 url(../images/MenuScreen2.png);
+}
+
+.helpScreen {
+	background: #000000 url(../images/HelpScreen.png);
+}
+
+.deadScreen {
+	background: #000000 url(../images/DeadScreen.png);
+}
+
+.playGame1 {
+	background: #000000  url(../images/background.png);
+}
