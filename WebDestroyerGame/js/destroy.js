@@ -99,10 +99,7 @@ var bg1 = new Background();
 var bg2 = new Background();
 var player1 = new Player();
 var explosionList = [];
-var explosionSound = document.getElementById('explosion');
-explosionSound.volume = .4;
-var introSound = document.getElementById('menuSong');
-introSound.volume = .4;
+
 var gameSound = document.getElementById('gameSong');
 gameSound.volume = .4;
 
@@ -145,8 +142,6 @@ function init() {
 	document.removeEventListener('click', playGame1Player, false);
 	document.addEventListener('click', menuScreen2, false);	
 	document.addEventListener('click', helpScreen, false);
-	introSound.loop = true;
-	introSound.play();	
 	initialization();
 	width = 575;
 	height = 800; }
@@ -253,8 +248,7 @@ function checkEnemyHit() {
 				}
 				score += 20;
 				enemyList1.splice(i, 1);
-				bulletList.splice(j, 1);
-				explosionSound.play(); }
+				bulletList.splice(j, 1); }
 		}
 	}
 	//Boss
@@ -855,7 +849,6 @@ function playGame1Player(e) {
 				$('#game').removeClass().addClass('playGame1');
 				drawInterval = setInterval(Draw, fps);
 				updateInterval = setInterval(Update, fps);
-				introSound.pause();
 				gameSound.loop = true;
 				gameSound.play(); }		
 		}
