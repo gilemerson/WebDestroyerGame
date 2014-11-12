@@ -67,7 +67,7 @@
   <ItemGroup>
     <Content Include="audio\backgroundtheme.mp3" />
     <Content Include="css\destroy.css" />
-    <Content Include="destroy.js" />
+    <Content Include="js\destroy.js" />
     <Content Include="images\background.png" />
     <Content Include="images\Bullet1.png" />
     <Content Include="images\Coin.png" />
