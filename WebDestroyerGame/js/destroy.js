@@ -21,8 +21,7 @@ var game = {
 	STATE_DEAD_SCREEN : 5,
 	STATE_STARTING_SCREEN2 : 6,
 	state : 0,
-	currentLevel: 0
-};
+	currentLevel: 0 };
 
 var isPlaying = false;
 var pressedKeys = [];
@@ -34,27 +33,21 @@ var KEY = {
 	C: 67,
 	LEFT: 100,
 	RIGHT: 102,
-	ZERO: 96
-};
+	ZERO: 96 };
 
 var width;
 var height;
-
 var mouseX = 0;
 var mouseY = 0;
-
 var spd = 8;
 var frameCount = 0;
 var fps = 50;
-
 var score = 0;
 var newRectangles;
 var factor = 150;  
-
-
 var dragging;
 
-//player variables
+//Player variables
 var bulletDelay;
 var bulletDelay2;
 var bulletList = [];
@@ -65,12 +58,10 @@ var bulletSpd = 20;
 var bd = 5;
 var bd2 = 5;
 var playerHealth = 6;
-//player variables
-
 var bulletDelay3;
 var bd3 = 15;
 
-//enemy variables
+//Enemy variables
 var enemyList1 = [];
 var enemySpd = 2;
 var enemyCount1 = 4;
@@ -78,15 +69,11 @@ var bulletEnemyList = [];
 var enemyBulletDelay = Math.floor((Math.random() * 30) + 50);
 var ebd = enemyBulletDelay;
 var bulletDelayEnemy = ebd;
-//enemy variables
-
-//Bosses
 var bossEnemyList1 = [];
 var bulletBossEnemyList1 = [];
 var bossHealth1 = 6;
-//Bosses
 
-//image variables
+//Images 
 var img = new Image();
 img.src = "images/background.png";
 var planeImage1 = new Image();
@@ -105,14 +92,11 @@ var healthItemImg = new Image();
 healthItemImg.src = "images/HealthItem.png";
 var coinItemImg = new Image();
 coinItemImg.src = "images/Coin.png";
-//image variables
 
-//object variables
+//Objects
 var bg1 = new Background();
 var bg2 = new Background();
 var player1 = new Player();
-//object variables
-
 var explosionList = [];
 var explosionSound = document.getElementById('explosion');
 explosionSound.volume = .4;
@@ -130,11 +114,11 @@ var player2Button = new Button(130, 485, 325, 415);
 var tryAgainButton = new Button(160, 390, 670, 705);
 var mainMenuButton = new Button(160, 390, 750, 785);
 
-//Health THings
+//Health 
 var healthBarList = [];
 var healthBarCount = 1;
 
-//Item Things
+//Items
 var healthItemList = [];
 var coinItemList = [];
 var dead = false;
@@ -153,8 +137,7 @@ function initialization(){
 	$(document).keyup(function(e){
 		pressedKeys[e.which] = false;	});	
 	bulletDelay = bd;
-	bulletDelay3 = bd3;
-}
+	bulletDelay3 = bd3; }
 
 function init() {	
 	game.state = game.STATE_STARTING_SCREEN;
@@ -165,8 +148,7 @@ function init() {
 	introSound.play();	
 	initialization();
 	width = 575;
-	height = 800;
-}
+	height = 800; }
 
 function menuScreenTwo() {
 
@@ -174,15 +156,13 @@ function menuScreenTwo() {
 	if(game.state == game.STATE_STARTING_SCREEN2)
 	{
 		document.addEventListener('click', backHelp2, false);
-		document.addEventListener('click', playGame1Player, false);
-	
+		document.addEventListener('click', playGame1Player, false);	
 	}
 }
 
 function helpScreenOne() {
 	$('#game').removeClass().addClass('helpScreen');
-	document.addEventListener('click', backHelp, false);
-}
+	document.addEventListener('click', backHelp, false); }
 
 function Dead() {
 	$('#game').removeClass().addClass('deadScreen');
@@ -190,8 +170,7 @@ function Dead() {
 	ctxPlayer1.clearRect(0,0, width, height);
 	ctxHUD.clearRect(0,0, width, height);
 	document.addEventListener('click', tryAgain, false);
-	document.addEventListener('click', mainMenu, false);
-}
+	document.addEventListener('click', mainMenu, false); }
 
 function Update() {
 	$("#score").html("Score: " + (score));
@@ -277,7 +256,7 @@ function checkEnemyHit() {
 				explosionSound.play(); }
 		}
 	}
-	//Boss1
+	//Boss
 	for(var i = 0; i < bossEnemyList1.length; i++)
 	{
 		for(var j = 0; j < bulletList.length; j++)
@@ -358,8 +337,7 @@ function checkPlayerHit() {
 				dead = true;
 			}			
 			healthBarList.pop();
-			bulletEnemyList.splice(i, 1);	
-		}
+			bulletEnemyList.splice(i, 1);		}
 	}
 
 	for(var i = 0; i < healthItemList.length; i++) 
@@ -410,8 +388,7 @@ function checkPlayerHit() {
 			}			
 			healthBarList.pop();
 			healthBarList.pop();
-			bulletBossEnemyList1.splice(i, 1);	
-		}
+			bulletBossEnemyList1.splice(i, 1);			}
 	}
 }
 
@@ -419,8 +396,7 @@ function drawExplosion () {
 	for(var i = 0; i < explosionList.length; i++)
 	{			
 			explosionList[i].draw();
-			explosionList[i].update();
-	}
+			explosionList[i].update();	}
 }
 
 function updateCollision() {
@@ -431,26 +407,23 @@ function updateCollision() {
 			explosionList.splice(i, 1);
 		}
 	}
-	checkEnemyHit();
-}
+	checkEnemyHit(); } 
 
 function updateHealthBar() {
 	if (healthBarCount < playerHealth)
 	{
 		healthBarCount++;
 		var healthBar = new Health((healthBarCount * 30) - 50);
-		healthBarList.push(healthBar);
-	}	
+		healthBarList.push(healthBar); }	
 }
 
 function drawHealthBar() {
 	ctxHUD.clearRect(0,0,575,800);
 	for(var i = 0; i < healthBarList.length; i++)
 	{
-		healthBarList[i].draw();
-	}	
+		healthBarList[i].draw(); }	
 }
-//Background functions
+//Background
 function drawBackgrounds() {
 	ctxBg.clearRect(0,0,575,800);	
 	bg1.draw();
@@ -458,10 +431,9 @@ function drawBackgrounds() {
 	if(bg1.drawY >= height)
 	{
 		bg1.drawY = 0;
-		bg2.drawY = -height;
-	}
+		bg2.drawY = -height; }
 }
-//Player1 Functions
+//Player
 function plane1Movement() {
 	if(pressedKeys[KEY.D])
 	{
@@ -485,8 +457,7 @@ function plane1Movement() {
 	}
 	else
 	{
-		spd = 8;
-	}
+		spd = 8; }
 }
 
 function drawPlayer1(){
@@ -495,7 +466,6 @@ function drawPlayer1(){
 	{
 		player1.draw();
 	}
-
 	if(pressedKeys[KEY.D])
 	{
 		player1.srcY = 0;
@@ -506,13 +476,11 @@ function drawPlayer1(){
 	    if (frameCount >= 1) {
 	        frameCount = 1;
 	    }    
-	}
-	
+	}	
 	if((!pressedKeys[KEY.D]) && (!pressedKeys[KEY.A]))
 	{
 		frameCount = 0;
 		player1.srcX = (frameCount * player1.width); }
-
 	if(pressedKeys[KEY.A])
 	{
 		frameCount++;
@@ -543,7 +511,6 @@ function shootBulletsPlayer1() {
 	{
 		bulletDelay--;
 	}
-
 	if(bulletDelay <= 0)
 	{
 		var newBulletPlayer1 = new Bullet(player1.drawX + 14, player1.drawY + 32);
@@ -553,10 +520,8 @@ function shootBulletsPlayer1() {
 		{
 			bulletList.push(newBulletPlayer1); }
 	}
-
 	if (bulletDelay == 0)
-		bulletDelay = bd;
-}
+	    bulletDelay = bd; }
 
 function updateBulletsPlayer1() {
 	for(var i = 0; i < bulletList.length; i++)
@@ -574,7 +539,6 @@ function drawBulletPlayer1(){
 		bulletList[i].draw();}		
 }
 
-//Enemy Functions
 function loadEnemies1() {
 	var x = Math.floor((Math.random() * 525) + 25);
 	var y = Math.floor((Math.random() * -400) - 100);
@@ -590,14 +554,12 @@ function loadEnemies1() {
 	{
 		enemyList1.push(newEnemy1);		
 	}
-
 	if ((score % factor == 10) || (score % factor == 30))
 	{
 		enemyCount1++;
 		factor += 300;
 		bossEnemyList1.push(newBoss1);
 	}
-	//movement
 	for (var i = 0; i < enemyList1.length; i++)
 	{
 		enemyList1[i].drawY += enemySpd;
@@ -607,15 +569,13 @@ function loadEnemies1() {
 			enemyList1.splice(i, 1);
 		}
 	}
-
 	for (var i = 0; i < bossEnemyList1.length; i++)
 	{
 		bossEnemyList1[i].drawY += enemySpd;
 
 		if(bossEnemyList1[i].drawY >= 800)
 		{
-			bossEnemyList1.splice(i, 1);
-		}
+			bossEnemyList1.splice(i, 1);		}
 	}
 }
 
@@ -624,8 +584,7 @@ function drawEnemies1() {
 		enemyList1[i].draw();
 	}
 	for (var i = 0; i < bossEnemyList1.length; i++) {
-		bossEnemyList1[i].draw();
-	}
+		bossEnemyList1[i].draw();	}
 }
 
 function shootBulletsEnemy1() {
@@ -664,7 +623,6 @@ function shootBulletsEnemy1() {
 				bulletBossEnemyList1.push(newBulletBoss1); }
 		}
 	}
-
 	if (bulletDelayEnemy == 0)
 		bulletDelayEnemy = ebd;
 }
@@ -679,7 +637,6 @@ function updateBulletsEnemy1() {
 		{
 			bulletEnemyList.splice(i, 1); }
 	}
-
 	for (var i = 0; i < bulletBossEnemyList1.length; i++)
 	{
 		bulletBossEnemyList1[i].drawY += 8;
@@ -694,14 +651,12 @@ function drawBulletEnemy1(){
 	for(var i = 0; i < bulletEnemyList.length; i++) {
 		bulletEnemyList[i].draw();
 	}
-
 	for(var i = 0; i < bulletBossEnemyList1.length; i++) {
 		bulletBossEnemyList1[i].draw();
 	}
 }
 
-//Classes
-//Player1
+//Player1 classes
 function Player() {
 	this.srcX = 0;
     this.srcY = 0;
@@ -713,7 +668,6 @@ function Player() {
 }
 
 Player.prototype.draw = function() {
-
 	ctxPlayer1.drawImage(this.img, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height); }
 
 function Item(drawX, drawY) {
@@ -727,7 +681,6 @@ function Item(drawX, drawY) {
 }
 
 Item.prototype.draw = function() {
-
 	ctxPlayer1.drawImage(this.img, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height); }
 
 function Health(drawX) {
@@ -807,16 +760,14 @@ Explosion.prototype.update = function() {
 			if(this.frameCount == 25)
 			{
 				this.frameCount = 0;
-				this.hasHit = false;
-			}
+				this.hasHit = false;			}
 		}
 }
 
 Explosion.prototype.draw = function() {
 	if(this.hasHit)
 	{
-		ctxPlayer1.drawImage(explosionImg, this.srcX = (this.frameCount * this.width), this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height);	
-	}			
+		ctxPlayer1.drawImage(explosionImg, this.srcX = (this.frameCount * this.width), this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height);	}			
 }
 
 function Button(left, right, top, bottom){
@@ -851,8 +802,7 @@ function helpScreen(e) {
 
 	if(helpButton.ButtonClicked())
 	{
-		if(game.state == game.STATE_STARTING_SCREEN)
-		{			
+		if(game.state == game.STATE_STARTING_SCREEN)		{			
 			game.state = game.STATE_HELP_SCREEN;
 			helpScreenOne(); }		
 	}
