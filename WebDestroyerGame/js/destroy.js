@@ -1,9 +1,10 @@
 //File Name: WebDestroyerGame
 //Last Modified By: Gil Emerson
-//Date Last Modified: 11/09/2014
+//Last Modified By: Gil Emerson
+//Date Last Modified: 11/12/2014
 //Program Description: Create an original 2D side scrolling arcade game (left to right & right to left).
-//The game must have a start screen, (that includes game instructions for the users)
-//the main game screen, and a end game screen.
+                       //The game must have a start screen, (that includes game instructions for the users)
+                      //the main game screen, and a end game screen.
 //Revision History: #3
 
 canvasBg = document.getElementById('game');
