@@ -6,7 +6,6 @@
                        //The game must have a start screen, (that includes game instructions for the users)
                       //the main game screen, and a end game screen.
 //Revision History: #3
-
 canvasBg = document.getElementById('game');
 ctxBg = canvasBg.getContext('2d');
 canvasPlayer1 = document.getElementById('player1');
@@ -23,7 +22,6 @@ var game = {
 	STATE_STARTING_SCREEN2 : 6,
 	state : 0,
 	currentLevel: 0 };
-
 var isPlaying = false;
 var pressedKeys = [];
 var KEY = {
@@ -50,9 +48,7 @@ var dragging;
 
 //Player variables
 var bulletDelay;
-var bulletDelay2;
 var bulletList = [];
-var bulletList2 = [];
 var bullet1IsColliding;
 var bullet1IsVisible = false;
 var bulletSpd = 20;
@@ -99,7 +95,6 @@ var bg1 = new Background();
 var bg2 = new Background();
 var player1 = new Player();
 var explosionList = [];
-
 var gameSound = document.getElementById('gameSong');
 gameSound.volume = .4;
 
@@ -108,7 +103,6 @@ var playButton = new Button(230, 410, 355, 440);
 var helpButton = new Button(205, 410, 450, 550);
 var backHelpButton = new Button(435, 560, 740, 780);
 var player1Button = new Button(145, 455, 200, 305);
-var player2Button = new Button(130, 485, 325, 415);
 var tryAgainButton = new Button(160, 390, 670, 705);
 var mainMenuButton = new Button(160, 390, 750, 785);
 
@@ -147,13 +141,10 @@ function init() {
 	height = 800; }
 
 function menuScreenTwo() {
-
 	$('#game').removeClass().addClass('menuScreen2');
-	if(game.state == game.STATE_STARTING_SCREEN2)
-	{
+	if(game.state == game.STATE_STARTING_SCREEN2){
 		document.addEventListener('click', backHelp2, false);
-		document.addEventListener('click', playGame1Player, false);	
-	}
+		document.addEventListener('click', playGame1Player, false);	}
 }
 
 function helpScreenOne() {
@@ -172,7 +163,6 @@ function Update() {
 	$("#score").html("Score: " + (score));
 	plane1Movement();
 	player1ScreenBoundary();
-	
 	if(pressedKeys[KEY.C])
 	{
 		shootBulletsPlayer1();
@@ -192,18 +182,14 @@ function Update() {
 	{
 		timer--;
 	}
-	if(timer <= 2)
-	{
+	if(timer <= 2){
 		game.state = game.STATE_DEAD_SCREEN;
 		Dead();
 		clearInterval(drawInterval);
 		clearInterval(updateInterval);
-		isPlaying = false;
-	}
-	if(!dead)
-	{
-		timer = 8;
-	}
+		isPlaying = false;}
+	if(!dead){
+		timer = 8;}
 }
 
 function Draw() {
@@ -218,7 +204,6 @@ function Draw() {
 
 function checkEnemyHit() {
 	var x = Math.floor((Math.random() * 99) + 1);
-
 	for(var i = 0; i < enemyList1.length; i++)
 	{
 		for(var j = 0; j < bulletList.length; j++)
@@ -226,8 +211,8 @@ function checkEnemyHit() {
 			if(bulletList[j].drawX >= enemyList1[i].drawX - (enemyList1[i].width/2) &&
 				bulletList[j].drawX <= enemyList1[i].drawX + enemyList1[i].width &&
 				bulletList[j].drawY >= enemyList1[i].drawY &&
-				bulletList[j].drawY <= enemyList1[i].drawY + enemyList1[i].height)
-			{
+				bulletList[j].drawY <= enemyList1[i].drawY + enemyList1[i].height) {
+
 				var explosion = new Explosion(enemyList1[i].drawX, enemyList1[i].drawY);
 				var healthItem = new Item(enemyList1[i].drawX, enemyList1[i].drawY);
 				var coinItem = new Item(enemyList1[i].drawX, enemyList1[i].drawY);
@@ -237,8 +222,7 @@ function checkEnemyHit() {
 				explosion.hasHit = true;
 				explosionList.push(explosion);
 
-				if(x > 85)
-				{
+				if(x > 85){
 					healthItemList.push(healthItem);
 				}
 				if(x < 90)
@@ -250,16 +234,13 @@ function checkEnemyHit() {
 				bulletList.splice(j, 1); }
 		}
 	}
-	//Boss
-	for(var i = 0; i < bossEnemyList1.length; i++)
-	{
-		for(var j = 0; j < bulletList.length; j++)
-		{
+	//Enemy
+	for(var i = 0; i < bossEnemyList1.length; i++){
+		for(var j = 0; j < bulletList.length; j++){
 			if(bulletList[j].drawX >= bossEnemyList1[i].drawX - (bossEnemyList1[i].width/2) &&
 				bulletList[j].drawX <= bossEnemyList1[i].drawX + bossEnemyList1[i].width &&
 				bulletList[j].drawY >= bossEnemyList1[i].drawY &&
-				bulletList[j].drawY <= bossEnemyList1[i].drawY + bossEnemyList1[i].height)
-			{
+				bulletList[j].drawY <= bossEnemyList1[i].drawY + bossEnemyList1[i].height){
 				var explosion = new Explosion(bossEnemyList1[i].drawX + 50, bossEnemyList1[i].drawY + 50);
 				var healthItem = new Item(bossEnemyList1[i].drawX + 50, bossEnemyList1[i].drawY + 50);
 				var coinItem = new Item(bossEnemyList1[i].drawX + 50, bossEnemyList1[i].drawY + 50);
@@ -267,11 +248,9 @@ function checkEnemyHit() {
 				coinItem.height = 20;
 				coinItem.img = coinItemImg;
 				bossHealth1--;
-				if(bossHealth1 == 0)
-				{
+				if(bossHealth1 == 0){
 					explosion.hasHit = true;
 					explosionList.push(explosion);
-
 					if(x > 85)
 					{
 						healthItemList.push(healthItem);
@@ -283,9 +262,7 @@ function checkEnemyHit() {
 					explosionSound.play();
 					score += 100;				
 					bossEnemyList1.splice(i, 1);
-					bossHealth1 = 6;
-				}
-
+					bossHealth1 = 6;}
 				bulletList.splice(j, 1); }
 		}
 	}
@@ -296,61 +273,46 @@ function drawItem() {
 	{
 		healthItemList[i].drawY += 3;
 		healthItemList[i].draw();
-
-		if(healthItemList[i].drawY >= 800)
-		{
-			healthItemList.splice(i, 1);
-		}
+		if(healthItemList[i].drawY >= 800){
+			healthItemList.splice(i, 1);}
 	}
 
-	for(var i = 0; i < coinItemList.length; i++)
-	{
+	for(var i = 0; i < coinItemList.length; i++){
 		coinItemList[i].drawY += 3;
 		coinItemList[i].draw();
 
-		if(coinItemList[i].drawY >= 800)
-		{
+		if(coinItemList[i].drawY >= 800){
 			coinItemList.splice(i, 1); }
 	}	
 }
 
 function checkPlayerHit() {
-	for(var i = 0; i < bulletEnemyList.length; i++)
-	{
+	for(var i = 0; i < bulletEnemyList.length; i++)	{
 		if(bulletEnemyList[i].drawX >= player1.drawX - (player1.width/2) &&
 			bulletEnemyList[i].drawX <= player1.drawX + player1.width &&
 			bulletEnemyList[i].drawY >= player1.drawY &&
-			bulletEnemyList[i].drawY <= player1.drawY + player1.height)
-		{
+			bulletEnemyList[i].drawY <= player1.drawY + player1.height){
 			var explosion = new Explosion(player1.drawX, player1.drawY);
 			playerHealth--;
-			if(healthBarList.length <= 1)
-			{	
+			if(healthBarList.length <= 1)		{	
 				explosion.hasHit = true;
 				explosionList.push(explosion);
-				dead = true;
-			}			
+				dead = true;			}			
 			healthBarList.pop();
 			bulletEnemyList.splice(i, 1);		}
 	}
-
 	for(var i = 0; i < healthItemList.length; i++) 
 	{
 		if(healthItemList[i].drawX >= player1.drawX - (player1.width/2) &&
 			healthItemList[i].drawX <= player1.drawX + player1.width &&
 			healthItemList[i].drawY >= player1.drawY &&
-			healthItemList[i].drawY <= player1.drawY + player1.height)
-		{
-			
-			if (healthBarList.length < playerHealth && playerHealth < 6)
-			{
+			healthItemList[i].drawY <= player1.drawY + player1.height){		
+			if (healthBarList.length < playerHealth && playerHealth < 6){
 				playerHealth++;
 				var healthBar = new Health((playerHealth * 30) - 50);
-				healthBarList.push(healthBar);
-			}
+				healthBarList.push(healthBar);	}
 			score += 20;
-			healthItemList.splice(i, 1);
-		}
+			healthItemList.splice(i, 1);}
 	}
 
 	for(var i = 0; i < coinItemList.length; i++) 
@@ -358,22 +320,18 @@ function checkPlayerHit() {
 		if(coinItemList[i].drawX >= player1.drawX - (player1.width/2) &&
 			coinItemList[i].drawX <= player1.drawX + player1.width &&
 			coinItemList[i].drawY >= player1.drawY &&
-			coinItemList[i].drawY <= player1.drawY + player1.height)
-		{
+			coinItemList[i].drawY <= player1.drawY + player1.height){
 			score += 20;
 			coinItemList.splice(i, 1); }
 	}
 
-	for(var i = 0; i < bulletBossEnemyList1.length; i++)
-	{
+	for(var i = 0; i < bulletBossEnemyList1.length; i++){
 		if(bulletBossEnemyList1[i].drawX + bulletBossEnemyList1[i].width / 2 >= player1.drawX - 50 &&
 			bulletBossEnemyList1[i].drawX + bulletBossEnemyList1[i].width / 2 <= (player1.drawX + player1.width + 50) &&
 			bulletBossEnemyList1[i].drawY + bulletBossEnemyList1[i].height >= player1.drawY &&
-			bulletBossEnemyList1[i].drawY + bulletBossEnemyList1[i].height <= player1.drawY + player1.height)
-		{
+			bulletBossEnemyList1[i].drawY + bulletBossEnemyList1[i].height <= player1.drawY + player1.height){
 			var explosion = new Explosion(player1.drawX, player1.drawY);
 			playerHealth -= 2;
-
 			if(healthBarList.length <= 1)
 			{	
 				explosion.hasHit = true;
@@ -382,7 +340,7 @@ function checkPlayerHit() {
 			}			
 			healthBarList.pop();
 			healthBarList.pop();
-			bulletBossEnemyList1.splice(i, 1);			}
+			bulletBossEnemyList1.splice(i, 1);}
 	}
 }
 
@@ -390,16 +348,14 @@ function drawExplosion () {
 	for(var i = 0; i < explosionList.length; i++)
 	{			
 			explosionList[i].draw();
-			explosionList[i].update();	}
+			explosionList[i].update();}
 }
 
 function updateCollision() {
 	for(var i = 0; i < explosionList.length; i++)
 	{	
-		if(!explosionList[i].hasHit)
-		{		
-			explosionList.splice(i, 1);
-		}
+		if(!explosionList[i].hasHit){		
+			explosionList.splice(i, 1);}
 	}
 	checkEnemyHit(); } 
 
@@ -429,10 +385,8 @@ function drawBackgrounds() {
 }
 //Player
 function plane1Movement() {
-	if(pressedKeys[KEY.D])
-	{
-		player1.drawX += spd;
-	}
+	if(pressedKeys[KEY.D]){
+		player1.drawX += spd;}
 	if(pressedKeys[KEY.A])
 	{
 		player1.drawX -= spd;
@@ -447,8 +401,7 @@ function plane1Movement() {
 	}
 	if(pressedKeys[KEY.SHIFT])
 	{
-		spd = 13;
-	}
+		spd = 13; }
 	else
 	{
 		spd = 8; }
@@ -464,12 +417,9 @@ function drawPlayer1(){
 	{
 		player1.srcY = 0;
 		frameCount++;
-
 	    player1.srcX = (frameCount * player1.width);
-
 	    if (frameCount >= 1) {
-	        frameCount = 1;
-	    }    
+	        frameCount = 1; }    
 	}	
 	if((!pressedKeys[KEY.D]) && (!pressedKeys[KEY.A]))
 	{
@@ -479,23 +429,18 @@ function drawPlayer1(){
 	{
 		frameCount++;
 	    player1.srcX = (frameCount * player1.width);
-
 	    if (frameCount >= 1) {
-	        frameCount = 1;
-	    }
+	        frameCount = 1; }
 	    player1.srcY = 64;}
 }
 
 function player1ScreenBoundary() {
 	if (player1.drawX <= 0 - 2) {
-		player1.drawX = 0 - 2;
-	}
+		player1.drawX = 0 - 2;}
 	if (player1.drawX >= width - 42) {
-		player1.drawX = width - 42;	
-	}
+		player1.drawX = width - 42;	}
 	if (player1.drawY <= 0) {
-		player1.drawY = 0;
-	}
+		player1.drawY = 0;}
 	if (player1.drawY >= height - 64) {
 		player1.drawY = height - 64; }
 }
@@ -505,27 +450,22 @@ function shootBulletsPlayer1() {
 	{
 		bulletDelay--;
 	}
-	if(bulletDelay <= 0)
-	{
+	if(bulletDelay <= 0){
 		var newBulletPlayer1 = new Bullet(player1.drawX + 14, player1.drawY + 32);
 		bullet1IsVisible = true;
 
-		if(bulletList.length < 20)
-		{
+		if(bulletList.length < 20){
 			bulletList.push(newBulletPlayer1); }
 	}
 	if (bulletDelay == 0)
 	    bulletDelay = bd; }
 
 function updateBulletsPlayer1() {
-	for(var i = 0; i < bulletList.length; i++)
-	{
+	for(var i = 0; i < bulletList.length; i++){
 		bulletList[i].drawY -= bulletSpd;
 
-		if(bulletList[i].drawY <= -10)
-		{
-			bulletList.splice(i, 1); }
-	}
+		if(bulletList[i].drawY <= -10){
+			bulletList.splice(i, 1); }}
 }
 
 function drawBulletPlayer1(){	
@@ -546,44 +486,36 @@ function loadEnemies1() {
 
 	if(enemyList1.length < enemyCount1)
 	{
-		enemyList1.push(newEnemy1);		
-	}
-	if ((score % factor == 10) || (score % factor == 30))
-	{
+		enemyList1.push(newEnemy1);		}
+	if ((score % factor == 10) || (score % factor == 30)){
 		enemyCount1++;
 		factor += 300;
-		bossEnemyList1.push(newBoss1);
-	}
-	for (var i = 0; i < enemyList1.length; i++)
-	{
+		bossEnemyList1.push(newBoss1);}
+	for (var i = 0; i < enemyList1.length; i++){
 		enemyList1[i].drawY += enemySpd;
-
 		if(enemyList1[i].drawY >= 800)
 		{
-			enemyList1.splice(i, 1);
-		}
+			enemyList1.splice(i, 1);}
 	}
 	for (var i = 0; i < bossEnemyList1.length; i++)
 	{
 		bossEnemyList1[i].drawY += enemySpd;
 
-		if(bossEnemyList1[i].drawY >= 800)
-		{
-			bossEnemyList1.splice(i, 1);		}
+		if(bossEnemyList1[i].drawY >= 800){
+			bossEnemyList1.splice(i, 1);}
 	}
 }
 
 function drawEnemies1() {
-	for(var i = 0; i < enemyList1.length; i++) {
+	for(var i = 0; i < enemyList1.length; i++){
 		enemyList1[i].draw();
 	}
-	for (var i = 0; i < bossEnemyList1.length; i++) {
-		bossEnemyList1[i].draw();	}
+	for (var i = 0; i < bossEnemyList1.length; i++){
+		bossEnemyList1[i].draw();}
 }
 
 function shootBulletsEnemy1() {
-	if(bulletDelayEnemy > 0)
-	{
+	if(bulletDelayEnemy > 0){
 		bulletDelayEnemy--; }
 
 	for (var i = 0; i < enemyList1.length; i++)
@@ -592,19 +524,15 @@ function shootBulletsEnemy1() {
 		newBulletEnemy1.width = 28;
 		newBulletEnemy1.img = enemyBullet1;
 
-		if(bulletDelayEnemy <= 0)
-		{
-			if(bulletEnemyList.length < 5)
-			{
+		if(bulletDelayEnemy <= 0){
+			if(bulletEnemyList.length < 5){
 				bulletEnemyList.push(newBulletEnemy1); }
 		}
 	}
 
 	var bossEnemyBullet1 = new Image();
 	bossEnemyBullet1.src = "images/EnemyBullet1.png";
-
-	for (var i = 0; i < bossEnemyList1.length; i++)
-	{
+	for (var i = 0; i < bossEnemyList1.length; i++)	{
 		var newBulletBoss1 = new Bullet(bossEnemyList1[i].drawX + 12, bossEnemyList1[i].drawY + 100);
 		newBulletBoss1.width = 68;
 		newBulletBoss1.height = 50;
@@ -612,14 +540,12 @@ function shootBulletsEnemy1() {
 
 		if(bulletDelayEnemy <= 0)
 		{
-			if(bulletBossEnemyList1.length < 3)
-			{
+			if(bulletBossEnemyList1.length < 3){
 				bulletBossEnemyList1.push(newBulletBoss1); }
 		}
 	}
 	if (bulletDelayEnemy == 0)
-		bulletDelayEnemy = ebd;
-}
+		bulletDelayEnemy = ebd;}
 
 function updateBulletsEnemy1() {
 
@@ -627,16 +553,14 @@ function updateBulletsEnemy1() {
 	{
 		bulletEnemyList[i].drawY += 10;
 
-		if(bulletEnemyList[i].drawY >= 800)
-		{
+		if(bulletEnemyList[i].drawY >= 800){
 			bulletEnemyList.splice(i, 1); }
 	}
 	for (var i = 0; i < bulletBossEnemyList1.length; i++)
 	{
 		bulletBossEnemyList1[i].drawY += 8;
 
-		if(bulletBossEnemyList1[i].drawY >= 800)
-		{
+		if(bulletBossEnemyList1[i].drawY >= 800){
 			bulletBossEnemyList1.splice(i, 1); }
 	}
 }
@@ -646,8 +570,7 @@ function drawBulletEnemy1(){
 		bulletEnemyList[i].draw();
 	}
 	for(var i = 0; i < bulletBossEnemyList1.length; i++) {
-		bulletBossEnemyList1[i].draw();
-	}
+		bulletBossEnemyList1[i].draw();	}
 }
 
 //Player1 classes
@@ -658,8 +581,7 @@ function Player() {
     this.height = 64;
     this.drawX = 0;
     this.drawY = 0;
-    this.img = planeImage1;
-}
+    this.img = planeImage1;}
 
 Player.prototype.draw = function() {
 	ctxPlayer1.drawImage(this.img, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height); }
@@ -671,8 +593,7 @@ function Item(drawX, drawY) {
     this.height = 20;
     this.drawX = drawX;
     this.drawY = drawY;
-    this.img = healthItemImg;
-}
+    this.img = healthItemImg;}
 
 Item.prototype.draw = function() {
 	ctxPlayer1.drawImage(this.img, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height); }
@@ -684,8 +605,7 @@ function Health(drawX) {
     this.height = 30;
     this.drawX = drawX;
     this.drawY = 10;
-    this.img = healthBarImg;
-}
+    this.img = healthBarImg;}
 
 Health.prototype.draw = function() {
 	ctxHUD.drawImage(this.img, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height); }
@@ -698,8 +618,7 @@ function Enemy(drawX, drawY) {
     this.drawX = drawX;
     this.drawY = drawY;
     this.img = enemyImage1;
-    this.hasHit = false;
-}
+    this.hasHit = false;}
 
 Enemy.prototype.draw = function() {
 	ctxPlayer1.drawImage(this.img, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height); }
@@ -711,8 +630,7 @@ function Bullet(drawX, drawY) {
     this.height = 10;
     this.drawX = drawX;
     this.drawY = drawY;
-    this.img = planeBullet1;  
-}
+    this.img = planeBullet1;}
 
 Bullet.prototype.draw = function() {
 	ctxPlayer1.drawImage(this.img, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height); }
@@ -725,8 +643,7 @@ function Background() {
     this.height = 800;
     this.drawX = 0;
     this.drawY = 0;
-    this.spd = 3;
-}
+    this.spd = 3;}
 
 Background.prototype.draw = function() {
 	ctxBg.drawImage(img, this.srcX, this.srcY, this.width, this.height, this.drawX, this.drawY += this.spd, this.width, this.height) }
@@ -739,19 +656,16 @@ function Explosion(drawX, drawY) {
     this.drawX = drawX;
     this.drawY = drawY;
     this.frameCount = 0;
-    this.hasHit = false;
-}
+    this.hasHit = false;}
 
 Explosion.prototype.update = function() {
-		if(this.frameCount < 25) 		{
+		if(this.frameCount < 25) {
 			this.frameCount++;
-			if(frameCount % 5 == 0)
-			{
-				this.srcY += 45; 			}
-			if(this.frameCount == 25)
-			{
+			if(frameCount % 5 == 0){
+				this.srcY += 45; }
+			if(this.frameCount == 25){
 				this.frameCount = 0;
-				this.hasHit = false;			}
+				this.hasHit = false;}
 		}
 }
 
@@ -774,9 +688,8 @@ function menuScreen2(e) {
 	var bgCanvas = document.getElementById('game');
 	mouseX = e.pageX - bgCanvas.offsetLeft;
 	mouseY = e.pageY - bgCanvas.offsetTop;	
-
 	if(playButton.ButtonClicked()) {
-		if(game.state == game.STATE_STARTING_SCREEN)		{			
+		if(game.state == game.STATE_STARTING_SCREEN){			
 			game.state = game.STATE_STARTING_SCREEN2;
 			menuScreenTwo(); }		
 	}
@@ -786,10 +699,8 @@ function helpScreen(e) {
 	var bgCanvas = document.getElementById('game');
 	mouseX = e.pageX - bgCanvas.offsetLeft;
 	mouseY = e.pageY - bgCanvas.offsetTop;	
-
-	if(helpButton.ButtonClicked())
-	{
-		if(game.state == game.STATE_STARTING_SCREEN)		{			
+	if(helpButton.ButtonClicked())	{
+		if(game.state == game.STATE_STARTING_SCREEN){			
 			game.state = game.STATE_HELP_SCREEN;
 			helpScreenOne(); }		
 	}
@@ -799,11 +710,9 @@ function backHelp(e) {
 	var bgCanvas = document.getElementById('game');
 	mouseX = e.pageX - bgCanvas.offsetLeft;
 	mouseY = e.pageY - bgCanvas.offsetTop;	
-
 	if(backHelpButton.ButtonClicked())
 	{
-		if(game.state == game.STATE_HELP_SCREEN)
-		{			
+		if(game.state == game.STATE_HELP_SCREEN){			
 			game.state = game.STATE_STARTING_SCREEN;
 			$('#game').removeClass().addClass('menuScreen'); }		
 	}
@@ -813,11 +722,8 @@ function backHelp2(e) {
 	var bgCanvas = document.getElementById('game');
 	mouseX = e.pageX - bgCanvas.offsetLeft;
 	mouseY = e.pageY - bgCanvas.offsetTop;	
-
-	if(backHelpButton.ButtonClicked())
-	{
-		if(game.state == game.STATE_STARTING_SCREEN2)
-		{			
+	if(backHelpButton.ButtonClicked()){
+		if(game.state == game.STATE_STARTING_SCREEN2){			
 			game.state = game.STATE_STARTING_SCREEN;
 			init();
 			$('#game').removeClass().addClass('menuScreen');
@@ -831,10 +737,8 @@ function playGame1Player(e) {
 	var bgCanvas = document.getElementById('game');
 	mouseX = e.pageX - bgCanvas.offsetLeft;
 	mouseY = e.pageY - bgCanvas.offsetTop;	
-	if(!isPlaying)
-	{
-		if(player1Button.ButtonClicked())
-		{
+	if(!isPlaying)	{
+		if(player1Button.ButtonClicked()){
 			if(game.state == game.STATE_STARTING_SCREEN2)
 			{			
 				game.state = game.STATE_PLAYING;
@@ -842,8 +746,7 @@ function playGame1Player(e) {
 				drawInterval = setInterval(Draw, fps);
 				updateInterval = setInterval(Update, fps);
 				gameSound.loop = true;
-				gameSound.play(); }		
-		}
+				gameSound.play(); }				}
 	}
 }
 
@@ -851,13 +754,9 @@ function tryAgain(e) {
 	var bgCanvas = document.getElementById('game');
 	mouseX = e.pageX - bgCanvas.offsetLeft;
 	mouseY = e.pageY - bgCanvas.offsetTop;	
-
-	if(!isPlaying)
-	{
-		if(tryAgainButton.ButtonClicked())
-		{
-			if(game.state == game.STATE_DEAD_SCREEN)
-			{			
+	if(!isPlaying)	{
+		if(tryAgainButton.ButtonClicked()){
+			if(game.state == game.STATE_DEAD_SCREEN){			
 				game.state = game.STATE_PLAYING;
 				$('#game').removeClass().addClass('playGame1');
 				drawInterval = setInterval(Draw, fps);
@@ -871,8 +770,7 @@ function tryAgain(e) {
 				playerHealth = 6;
 				healthBarCount = 1;
 				isPlaying = true;
-				score = 0; }		
-		}
+				score = 0; }}
 	}
 }
 
@@ -880,11 +778,9 @@ function mainMenu(e) {
 	var bgCanvas = document.getElementById('game');
 	mouseX = e.pageX - bgCanvas.offsetLeft;
 	mouseY = e.pageY - bgCanvas.offsetTop;	
-
 	if(mainMenuButton.ButtonClicked())
 	{
-		if(game.state == game.STATE_DEAD_SCREEN)
-		{			
+		if(game.state == game.STATE_DEAD_SCREEN){			
 			init();
 			dead = false;
 			$('#game').removeClass().addClass('menuScreen'); }		
