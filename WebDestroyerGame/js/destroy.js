@@ -743,14 +743,11 @@ function Explosion(drawX, drawY) {
 }
 
 Explosion.prototype.update = function() {
-		if(this.frameCount < 25)
-		{
+		if(this.frameCount < 25) 		{
 			this.frameCount++;
-
 			if(frameCount % 5 == 0)
 			{
-				this.srcY += 45;
-			}
+				this.srcY += 45; 			}
 			if(this.frameCount == 25)
 			{
 				this.frameCount = 0;
@@ -759,10 +756,8 @@ Explosion.prototype.update = function() {
 }
 
 Explosion.prototype.draw = function() {
-	if(this.hasHit)
-	{
-		ctxPlayer1.drawImage(explosionImg, this.srcX = (this.frameCount * this.width), this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height);	}			
-}
+	if(this.hasHit) {
+		ctxPlayer1.drawImage(explosionImg, this.srcX = (this.frameCount * this.width), this.srcY, this.width, this.height, this.drawX, this.drawY, this.width, this.height);	}			}
 
 function Button(left, right, top, bottom){
 	this.l = left;
@@ -780,10 +775,8 @@ function menuScreen2(e) {
 	mouseX = e.pageX - bgCanvas.offsetLeft;
 	mouseY = e.pageY - bgCanvas.offsetTop;	
 
-	if(playButton.ButtonClicked())
-	{
-		if(game.state == game.STATE_STARTING_SCREEN)
-		{			
+	if(playButton.ButtonClicked()) {
+		if(game.state == game.STATE_STARTING_SCREEN)		{			
 			game.state = game.STATE_STARTING_SCREEN2;
 			menuScreenTwo(); }		
 	}
