@@ -872,7 +872,6 @@ function tryAgain(e) {
 				ctxBg.clearRect(0,0, width, height);
 				ctxPlayer1.clearRect(0,0, width, height);
 				ctxHUD.clearRect(0,0, width, height);
-				introSound.pause();
 				gameSound.loop = true;
 				gameSound.play();
 				dead = false;
