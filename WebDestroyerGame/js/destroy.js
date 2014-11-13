@@ -27,8 +27,6 @@ var pressedKeys = [];
 var KEY = {
 	D: 68,
 	A: 65,
-	SHIFT: 16,
-	SPACE: 32,
 	C: 67,
 	LEFT: 100,
 	RIGHT: 102,
@@ -259,7 +257,6 @@ function checkEnemyHit() {
 					{
 						coinItemList.push(coinItem);
 					}
-					explosionSound.play();
 					score += 100;				
 					bossEnemyList1.splice(i, 1);
 					bossHealth1 = 6;}
@@ -710,8 +707,7 @@ function backHelp(e) {
 	var bgCanvas = document.getElementById('game');
 	mouseX = e.pageX - bgCanvas.offsetLeft;
 	mouseY = e.pageY - bgCanvas.offsetTop;	
-	if(backHelpButton.ButtonClicked())
-	{
+	if(backHelpButton.ButtonClicked())	{
 		if(game.state == game.STATE_HELP_SCREEN){			
 			game.state = game.STATE_STARTING_SCREEN;
 			$('#game').removeClass().addClass('menuScreen'); }		
