@@ -34,11 +34,8 @@ body {
 }
 
 #score {
-	position: absolute;
-	margin: 800px 550px 0px;
-	top: 10px;
-	left: 10px;
     color: red;
+    text-align: center;
 }
 
 #warning {
