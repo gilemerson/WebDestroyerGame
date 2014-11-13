@@ -183,7 +183,6 @@ function Update() {
 	}
 	updateBulletsPlayer1();
 	loadEnemies1();
-	document.addEventListener('mousedown', mouseDownListener, false)
 	shootBulletsEnemy1();
 	updateBulletsEnemy1();
 	updateCollision();
@@ -898,70 +897,4 @@ function mainMenu(e) {
 			dead = false;
 			$('#game').removeClass().addClass('menuScreen'); }		
 	}
-}
-//try only
-//if u click the player it follows the mouse and shoots
-function mouseDownListener(e) {
-	var bgCanvas = document.getElementById('game');
-	mouseX = e.pageX - bgCanvas.offsetLeft;
-	mouseY = e.pageY - bgCanvas.offsetTop;	
-	if(player1.drawX <= mouseX && mouseX <= player1.drawX + player1.width && player1.drawY <= mouseY && mouseY <= player1.drawY + player1.height)
-	{
-		if(game.state == game.STATE_PLAYING)
-		{			
-			dragging = true; }		
-	}
-
-	if(dragging) {
-		document.addEventListener('mousemove', mouseMoveListener, false);
-	}
-	document.removeEventListener('mousedown', mouseDownListener, false);
-	document.addEventListener('mouseup', mouseUpListener, false);
-}
-
-function mouseMoveListener(e) {
-	var bgCanvas = document.getElementById('game');
-	mouseX = e.pageX - bgCanvas.offsetLeft;
-	mouseY = e.pageY - bgCanvas.offsetTop;	
-	if(player1.drawX <= mouseX && mouseX <= player1.drawX + player1.width && player1.drawY <= mouseY && mouseY <= player1.drawY + player1.height)
-	{
-		if(game.state == game.STATE_PLAYING) {			
-			player1.drawX = mouseX - (player1.width / 2);
-			player1.drawY = mouseY - (player1.height / 2);
-			shootBulletsPlayer123();
-			console.log(bulletDelay3); }		
-	}
-}
-
-function mouseUpListener(e) {
-	var bgCanvas = document.getElementById('game');
-	mouseX = e.pageX - bgCanvas.offsetLeft;
-	mouseY = e.pageY - bgCanvas.offsetTop;	
-
-	document.addEventListener("mousedown", mouseDownListener, false);
-	document.removeEventListener("mouseup", mouseUpListener, false);
-	if (dragging) {
-		dragging = false;
-		document.removeEventListener("mousemove", mouseMoveListener, false); }
-}
-
-function shootBulletsPlayer123() {
-	if(bulletDelay3 >= 0)
-	{
-		bulletDelay3--;
-	}
-
-	if(bulletDelay3 <= 0)
-	{
-		var newBulletPlayer1 = new Bullet(player1.drawX + 14, player1.drawY + 32);
-		bullet1IsVisible = true;
-
-		if(bulletList.length < 20)
-		{
-			bulletList.push(newBulletPlayer1);
-		}
-	}
-
-	if (bulletDelay3 == 0)
-		bulletDelay3 = bd3;
 }
