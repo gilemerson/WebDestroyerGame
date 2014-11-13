@@ -5,7 +5,7 @@
 //Program Description: Create an original 2D side scrolling arcade game (left to right & right to left).
                        //The game must have a start screen, (that includes game instructions for the users)
                       //the main game screen, and a end game screen.
-//Revision History: #3
+//Revision History: #4
 canvasBg = document.getElementById('game');
 ctxBg = canvasBg.getContext('2d');
 canvasPlayer1 = document.getElementById('player1');
