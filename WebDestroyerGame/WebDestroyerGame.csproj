@@ -73,7 +73,7 @@
     <Content Include="images\Coin.png" />
     <Content Include="images\DeadScreen.png" />
     <Content Include="images\EnemyBullet1.png" />
-    <Content Include="images\EnemyOwn1.png" />
+    <Content Include="images\Enemy.png" />
     <Content Include="images\Explosion.png" />
     <Content Include="images\HealthBar.png" />
     <Content Include="images\HealthItem.png" />

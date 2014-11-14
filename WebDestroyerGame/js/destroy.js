@@ -76,7 +76,7 @@ planeImage1.src = "images/Plane1.png";
 var planeBullet1 = new Image();
 planeBullet1.src = "images/Bullet1.png";
 var enemyImage1 = new Image();
-enemyImage1.src = "images/EnemyOwn1.png";
+enemyImage1.src = "images/Enemy.png";
 var enemyBullet1 = new Image();
 enemyBullet1.src = "images/EnemyBullet1.png";
 var explosionImg = new Image();
@@ -475,7 +475,7 @@ function loadEnemies1() {
 	var y = Math.floor((Math.random() * -400) - 100);
 	var newEnemy1 = new Enemy(x, y);
 	var bossImage1 = new Image();
-	bossImage1.src = "images/EnemyOwn1.png";
+	bossImage1.src = "images/Enemy.png";
 	var newBoss1 = new Enemy(Math.floor((Math.random() * 450) + 75), y);
 	newBoss1.width = 100;
 	newBoss1.height = 100;
