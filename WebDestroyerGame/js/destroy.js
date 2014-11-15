@@ -78,7 +78,7 @@ planeBullet1.src = "images/Bullet1.png";
 var enemyImage1 = new Image();
 enemyImage1.src = "images/Enemy.png";
 var enemyBullet1 = new Image();
-enemyBullet1.src = "images/EnemyBullet1.png";
+enemyBullet1.src = "images/EnemyShoot.png";
 var explosionImg = new Image();
 explosionImg.src = "images/Explosion.png";
 var healthBarImg = new Image();
@@ -528,7 +528,7 @@ function shootBulletsEnemy1() {
 	}
 
 	var bossEnemyBullet1 = new Image();
-	bossEnemyBullet1.src = "images/EnemyBullet1.png";
+	bossEnemyBullet1.src = "images/EnemyShoot.png";
 	for (var i = 0; i < bossEnemyList1.length; i++)	{
 		var newBulletBoss1 = new Bullet(bossEnemyList1[i].drawX + 12, bossEnemyList1[i].drawY + 100);
 		newBulletBoss1.width = 68;
